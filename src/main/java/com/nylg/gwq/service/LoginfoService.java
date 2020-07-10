@@ -14,4 +14,5 @@ import com.nylg.gwq.entity.Loginfo;
  */
 public interface LoginfoService extends IService<Loginfo> {
 
+
 }

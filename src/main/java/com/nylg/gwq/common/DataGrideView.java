@@ -3,6 +3,7 @@ package com.nylg.gwq.common;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.aspectj.apache.bcel.classfile.Code;
 
 @Data
 @NoArgsConstructor
@@ -16,12 +17,17 @@ public class DataGrideView {
 
 
 
-    public DataGrideView(Object data) {
+  /*  public DataGrideView(Object data) {
         this.data = data;
+    }*/
+     public DataGrideView(Object data) {
+         this.data = data;
     }
 
     public DataGrideView(Long count, Object data) {
         this.count = count;
         this.data = data;
     }
+
+
 }

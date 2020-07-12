@@ -11,14 +11,13 @@ import com.nylg.gwq.entity.Dept;
 import com.nylg.gwq.service.DeptService;
 import com.nylg.gwq.vo.DeptVo;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/dept")
-public class deptController {
+public class DeptController {
     @Autowired
     private DeptService deptService;
 
@@ -28,9 +27,6 @@ public class deptController {
         List<Dept> list = this.deptService.list();
         List<TreeNodes> treeNodes = new ArrayList<>();
         for (Dept dept: list){
-           /* TreeNodes nodes = new TreeNodes();
-            BeanUtils.copyProperties(dept,nodes);
-            treeNodes.add(nodes);*/
             Boolean spread = dept.getOpen()==1?true:false;
             treeNodes.add(new TreeNodes(dept.getId(),dept.getPid(),dept.getTitle(),spread));
         }
@@ -76,7 +72,8 @@ public class deptController {
         Map<String,Object> map = new HashMap<>();
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.orderByDesc("ordernum");
-        List<Dept> depts = this.deptService.list(queryWrapper);
+        IPage<Dept> page = new Page<>(1,1);
+        List<Dept> depts = this.deptService.page(page,queryWrapper).getRecords();
         if (depts.size()>0){
             map.put("ordernum",depts.get(0).getOrdernum()+1);
         }else {

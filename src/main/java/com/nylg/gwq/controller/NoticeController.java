@@ -23,7 +23,7 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("/notice")
-public class noticeController {
+public class NoticeController {
 
     @Autowired
     private NoticeService noticeService;
@@ -35,9 +35,9 @@ public class noticeController {
         QueryWrapper<Notice> queryWrapper = new QueryWrapper<>();
         queryWrapper.like(StringUtils.isNoneBlank(vo.getTitle()),"title",vo.getTitle());
         queryWrapper.like(StringUtils.isNoneBlank(vo.getOpername()),"opername",vo.getOpername());
-        queryWrapper.ge(vo.getStartTime()!=null,"createTime",vo.getStartTime());
-        queryWrapper.le(vo.getEndTime()!=null,"createTime",vo.getEndTime());
-        queryWrapper.orderByDesc("createTime");
+        queryWrapper.ge(vo.getStartTime()!=null,"createtime",vo.getStartTime());
+        queryWrapper.le(vo.getEndTime()!=null,"createtime",vo.getEndTime());
+        queryWrapper.orderByDesc("createtime");
         this.noticeService.page(page, queryWrapper);
         return new DataGrideView(page.getTotal(),page.getRecords());
 

@@ -21,6 +21,25 @@ public class TreeNodes {
     private Boolean spread;
     private List<TreeNodes> children = new ArrayList<TreeNodes>();
 
+    private String checkArr="0";  //0代表不选中  1代表选中
+
+
+    /**
+     * dtree的复选树的构造方法
+     * @param id
+     * @param pid
+     * @param title
+     * @param spread
+     * @param checkArr
+     */
+    public TreeNodes(Integer id, Integer pid, String title, Boolean spread, String checkArr) {
+        this.id = id;
+        this.pid = pid;
+        this.title = title;
+        this.spread = spread;
+        this.checkArr = checkArr;
+    }
+
     /**
      * detreee的数据格式
      * @param id

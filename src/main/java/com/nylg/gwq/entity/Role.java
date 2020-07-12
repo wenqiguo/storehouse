@@ -15,19 +15,21 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("sys_loginfo")
-public class Loginfo implements Serializable {
+@TableName("sys_role")
+public class Role implements Serializable {
 
     private static final long serialVersionUID=1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private String loginname;
+    private String name;
 
-    private String loginip;
+    private String remark;
 
-    private Date logintime;
+    private Integer available;
+
+    private Date createtime;
 
 
 }

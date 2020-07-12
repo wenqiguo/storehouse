@@ -8,17 +8,11 @@ import com.nylg.gwq.dao.DeptMapper;
 import com.nylg.gwq.entity.Dept;
 import com.nylg.gwq.service.DeptService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
-/**
- * <p>
- *  服务实现类
- * </p>
- *
- * @author 老雷
- * @since 2019-09-23
- */
 @Service
+@Transactional
 public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements DeptService {
 	
 	@Override
@@ -31,7 +25,8 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
 		// TODO Auto-generated method stub
 		return super.updateById(entity);
 	}
-	
+
+
 	@Override
 	public boolean removeById(Serializable id) {
 		return super.removeById(id);

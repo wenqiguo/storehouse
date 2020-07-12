@@ -15,12 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 @RestController
 @RequestMapping("/loginfo")
-public class loginfoController {
+public class LogInfoController {
     @Autowired
     private LoginfoService loginfoService;
 

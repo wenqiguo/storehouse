@@ -48,4 +48,28 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             }
         }
     }
+
+    /**
+     * 查询用户拥有的角色合集
+     * @param id
+     * @return
+     */
+
+    @Override
+    public List<Integer> queryRoleIdsByUid(Integer id) {
+        return this.baseMapper.queryRoleIdsByUid(id);
+    }
+
+    @Override
+    public void saveUserRole(Integer uid, Integer[] ids) {
+        //先删除该用户原有的角色和用户的关系
+        this.baseMapper.deleteRoleUserByUid(uid);
+        if (ids.length>0&&ids!=null){
+            for (Integer rid : ids){
+                this.baseMapper.saveUidAndRid(uid,rid);
+            }
+        }
+
+        //保存新的角色用户关系
+    }
 }

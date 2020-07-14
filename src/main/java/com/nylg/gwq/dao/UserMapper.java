@@ -6,4 +6,6 @@ import com.nylg.gwq.entity.User;
 
 public interface UserMapper extends BaseMapper<User> {
 
+    User getByName(String name);
+
 }

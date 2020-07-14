@@ -12,4 +12,8 @@ public interface RoleService extends IService<Role> {
     List<Integer> queryRolePermissionIdByRid(Integer roleId);
 
     void savePermissionIdAndRoleId(Integer roleId, Integer[] ids);
+
+    List<Integer> queryRoleIdsByUid(Integer id);
+
+    void saveUserRole(Integer uid, Integer[] ids);
 }

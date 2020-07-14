@@ -7,6 +7,8 @@ import com.nylg.gwq.common.*;
 import com.nylg.gwq.entity.Permission;
 import com.nylg.gwq.entity.User;
 import com.nylg.gwq.service.PermissionService;
+import com.nylg.gwq.service.RoleService;
+import com.nylg.gwq.service.UserService;
 import com.nylg.gwq.vo.PermissionVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,10 @@ public class MenuController {
     @Autowired
     private PermissionService permissionService;
 
+
+    @Autowired
+    private RoleService roleService;
+
     @RequestMapping("/loadIndexLeftMenuJson")
     public DataGrideView loadIndexLeftMenuJson(PermissionVo vo, HttpSession session){
         QueryWrapper<Permission> queryWrapper = new QueryWrapper<>();
@@ -34,7 +40,23 @@ public class MenuController {
             list =permissionService.list();
         }else {
             //根据用户获取角色+权限
-            list =permissionService.list();
+            Integer uid = user.getId();
+            //获取角色id
+            List<Integer> currentRoleIds = roleService.queryRoleIdsByUid(uid);
+            //获取角色获取菜单和权限
+            Set<Integer> pids = new HashSet<>();
+            for (Integer  id : currentRoleIds){
+                List<Integer> pidList = roleService.queryRolePermissionIdByRid(id);
+                pids.addAll(pidList);
+            }
+            //根据pid查Perssion
+            if (pids.size()>0){
+                QueryWrapper<Permission> wrapper = new QueryWrapper<>();
+                wrapper.in("pid",pids);
+                list =  permissionService.list(wrapper);
+            }else {
+                list = new ArrayList<>();
+            }
         }
         List<TreeNodes> treeNodes = new ArrayList<>();
         for (Permission p : list){
